@@ -40,6 +40,11 @@ def index():
     return redirect(url_for("login"))
 
 
+@app.route("/iyi-ki-dogdun-nazli")
+def nazli_special():
+    return redirect(url_for("login"))
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     error = None
