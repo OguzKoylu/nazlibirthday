@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kayıt Ekranı</title>
+  <style>
+    :root {
+      --page: #f1f8e9;
+      --card: #ffffff;
+      --text: #213326;
+      --muted: #607162;
+      --green: #66bb6a;
+      --green-dark: #3f8f46;
+      --danger: #b94a48;
+      --shadow: 0 18px 45px rgba(71, 111, 75, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top right, rgba(197, 225, 165, 0.65), transparent 34%),
+        var(--page);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .auth-card {
+      width: min(100%, 420px);
+      padding: 34px 24px 28px;
+      border-radius: 24px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(129, 199, 132, 0.22);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      color: #2f6f36;
+      font-size: clamp(28px, 8vw, 38px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-align: center;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    label {
+      color: #36543b;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      border: 1px solid #c8e6c9;
+      border-radius: 14px;
+      padding: 14px 15px;
+      background: #fbfff7;
+      color: var(--text);
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(102, 187, 106, 0.16);
+    }
+
+    .error {
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: #ffebee;
+      color: var(--danger);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      min-height: 50px;
+      border: 0;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: white;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(76, 175, 80, 0.24);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(76, 175, 80, 0.28);
+    }
+
+    .auth-link {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    .auth-link a {
+      color: #2f7d38;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .auth-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 420px) {
+      body {
+        padding: 16px;
+      }
+
+      .auth-card {
+        padding: 30px 18px 24px;
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="auth-card" aria-label="Kayıt formu">
+    <h1>Kayıt Ekranı</h1>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" action="{{ url_for('register') }}">
+      <div class="field">
+        <label for="username">Kullanıcı adı</label>
+        <input id="username" name="username" type="text" autocomplete="username" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Şifre</label>
+        <input id="password" name="password" type="password" autocomplete="new-password" required>
+      </div>
+
+      <button type="submit">Kaydı Tamamla</button>
+    </form>
+
+    <p class="auth-link">
+      <a href="{{ url_for('login') }}">Giriş sayfasına dön</a>
+    </p>
+  </main>
+</body>
+</html>
